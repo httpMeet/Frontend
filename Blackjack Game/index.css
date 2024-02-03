@@ -61,5 +61,10 @@ div{
     padding: 20px;
 }
 #messages-el{
-    color: darkred;
+        color: darkred;
+        opacity: 0; 
+        transition: opacity 1s ease-in-out; 
+}
+.fade-in {
+    opacity: 1 !important; /* Set opacity to 1 when the fade-in class is applied */
 }

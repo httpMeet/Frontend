@@ -37,20 +37,20 @@ function startGame() {
 }
 
 function renderGame() {
-    cardsEl.textContent = "Cards: "
+    cardsEl.textContent = "Cards: ";
     for (let i = 0; i < cards.length; i++) {
-        cardsEl.textContent += cards[i] + " "
+        cardsEl.textContent += cards[i] + " ";
     }
 
-    sumEl.textContent = "Sum: " + sum
+    sumEl.textContent = "Sum: " + sum;
     if (sum <= 20) {
-        message = "Want to play a round?"
+        message = "Want to play a round?";
     } else if (sum === 21) {
-        sum = 21
-        hasBlackJack = true
+        sum = 21;
+        hasBlackJack = true;
     } else {
         sumEl.textContent = "Sum: " + " " + "Your total is: " + " " + sum;
-        isAlive = false
+        isAlive = false;
     }
 
     if (hasBlackJack === true) {
@@ -62,6 +62,17 @@ function renderGame() {
     } else {
         messagesEl.textContent = "Do you want to draw a new Card?";
     }
+
+    // Triggering a reflow before adding the fade-in class
+    void messagesEl.offsetWidth;
+    
+    // Adding the fade-in class
+    messagesEl.classList.add("fade-in");
+
+    // Setting opacity to 1 after a short delay
+    setTimeout(() => {
+        messagesEl.style.opacity = 1;
+    }, 100);
 
     playerEl.textContent = player.name + ": $" + player.chips;
 
@@ -87,3 +98,9 @@ function newCard() {
         messagesEl.textContent = "You're out of chips! Game over.";
     }
 }
+
+// Event listener for the "START GAME" button
+document.getElementById("start-button").addEventListener("click", startGame);
+
+// Event listener for the "NEW CARD" button
+document.getElementById("new-card-button").addEventListener("click", newCard);
