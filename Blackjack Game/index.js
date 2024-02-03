@@ -1,6 +1,6 @@
 let player = {
     name: "Your Name",
-    chips: 1000
+    chips: 1000000
 }
 
 let cards = []
@@ -17,7 +17,7 @@ let messagesEl = document.getElementById("messages-el")
 playerEl.textContent = player.name + ": $" + player.chips
 
 function getRandomCard() {
-    let randomNumber = Math.floor( Math.random()*13 ) + 1
+    let randomNumber = Math.floor(Math.random() * 13) + 1
     if (randomNumber > 10) {
         return 10
     } else if (randomNumber === 1) {
@@ -41,7 +41,7 @@ function renderGame() {
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
-    
+
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Want to play a round?"
@@ -49,34 +49,41 @@ function renderGame() {
         sum = 21
         hasBlackJack = true
     } else {
-        sumEl.textContent = "Sum: "+ " " +  "Your total is: "+ " " + sum;
+        sumEl.textContent = "Sum: " + " " + "Your total is: " + " " + sum;
         isAlive = false
-        
-       
-    }
-    if(hasBlackJack === true){
-       messagesEl.textContent = "You Got an BalckJack ! Your Total is:"+" "+sum
-    }
-    else if(isAlive === false){
-        messagesEl.textContent = "Out Of the game ! Because Your Total is:" +" " + sum
-    }
-    else{
-        messagesEl.textContent = "Do you want to draw a new Card?"
     }
 
-    if(hasBlackJack === true || isAlive === false){
-        cardsEl.textContent = "Cards: "
-        sumEl.textContent = "Sum: "
+    if (hasBlackJack === true) {
+        messagesEl.textContent = "You Got a Blackjack! Your Total is: " + sum;
+        player.chips = player.chips + 500;
+    } else if (isAlive === false) {
+        messagesEl.textContent = "Out Of the game! Because Your Total is: " + sum;
+        player.chips = player.chips - 500;
+    } else {
+        messagesEl.textContent = "Do you want to draw a new Card?";
     }
-    messageEl.textContent = message
+
+    playerEl.textContent = player.name + ": $" + player.chips;
+
+    if (player.chips <= 0) {
+        messagesEl.textContent = "You're out of chips! Game over.";
+        isAlive = false;
+    }
+
+    if (hasBlackJack === true || isAlive === false) {
+        cardsEl.textContent = "Cards: ";
+        sumEl.textContent = "Sum: ";
+    }
+    messageEl.textContent = message;
 }
 
-
 function newCard() {
-    if (isAlive === true && hasBlackJack === false) {
-        let card = getRandomCard()
-        sum += card
-        cards.push(card)
-        renderGame()        
+    if (isAlive === true && hasBlackJack === false && player.chips > 0) {
+        let card = getRandomCard();
+        sum += card;
+        cards.push(card);
+        renderGame();
+    } else if (player.chips <= 0) {
+        messagesEl.textContent = "You're out of chips! Game over.";
     }
 }
