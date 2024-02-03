@@ -54,3 +54,6 @@ div{
 #player-el{
     padding: 20px;
 }
+#messages-el{
+    color: darkred;
+}
