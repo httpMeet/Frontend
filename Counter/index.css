@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
 .Parent{
     height: 100vh;
     width: 100vw;
@@ -12,8 +17,11 @@
 }
 .child{
     border: 8px solid black;
-    max-height:300px;
-    max-width: 300px;
+    min-height:300px;
+    min-width: 300px;
+}
+.child > p {
+     padding: 30px;
 }
 
 h1 {
@@ -36,13 +44,14 @@ button {
     width: 200px;
     margin-bottom: 5px;
     border-radius: 5px;
+    margin: 5px;
 }
 
 #increment-btn {
-    background: darkred;
+    background:#2ecc71;
 }
 
 #save-btn {
-    background: darkgreen;
+    background:#3498db;
 }
 
