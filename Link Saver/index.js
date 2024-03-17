@@ -12,18 +12,6 @@ if (leadsFromLocalStorage) {
     renderLeads()
 }
 
-inputBtn.addEventListener("click", function() {
-    myLeads.push(inputEl.value)
-    inputEl.value = ""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-    renderLeads()
-})
-
-deleteBtn.addEventListener("dblclick",function(){
-    localStorage.clear()
-    myLeads = []
-    renderLeads()
-})
 
 function renderLeads() {
     let listItems = ""
@@ -38,3 +26,19 @@ function renderLeads() {
     }
     ulEl.innerHTML = listItems  
 }
+
+
+
+inputBtn.addEventListener("click", function() {
+    myLeads.push(inputEl.value)
+    inputEl.value = ""
+    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+    renderLeads()
+})
+
+deleteBtn.addEventListener("dblclick",function(){
+    localStorage.clear()
+    myLeads = []
+    renderLeads()
+})
+
